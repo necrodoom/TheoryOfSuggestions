@@ -1,0 +1,791 @@
+Skills:
+  {
+    "id": "puppetry",
+    "name": "puppetry",
+    "require": "g.crafting>=8&&g.spiritlore>=5",
+    "desc": "Creating and animating magical puppets",
+    "level": 3,
+    "run": {
+      "stamina": 0.4
+    },
+    "result": {
+      "sp": 0.05
+    },
+    "mod": {
+      "puppet.health": "1%", //increases attack and health of puppet-type minions. The effect is additive between all sources
+	  "puppet.attack": "1%",
+      "minions.maxAllies": 0.25,
+      "research.max": 5
+    }
+  },
+  {
+    "id": "animation",
+    "name": "animation",
+    "require": "g.puppetry>=5&&g.spiritlore>=10",
+    "desc": "Imbuing objects with movement",
+    "level": 5,
+    "run": {
+      "stamina": 0.7
+    },
+    "result": {
+      "sp": 0.05
+    },
+    "mod": {
+	  "puppet.attack": "1%", //improves attacking capabilities of puppets and machinae
+	  "machina.attack": "1%",
+	  "puppetry.max": "0.2",
+      "minions.maxAllies": 0.25,
+      "research.max": 5
+    }
+  },
+  {
+    "id": "machinacreation",
+    "name": "mechanical construction",
+    "require": "g.crafting>=12&&g.puppetry>=6&&g.animation>=5&&g.tier2>0",
+    "desc": "Assembling magical machines",
+    "level": 5,
+    "run": {
+      "stamina": 0.7
+    },
+    "result": {
+      "sp": 0.05
+    },
+    "mod": {
+	  "machina.health": "1%",, //improves attack and health of machinae
+	  "machina.attack": "1%",
+	  "puppetry.max": "0.2",
+	  "animation.max": "0.2",
+      "minions.maxAllies": 0.25,
+      "research.max": 5
+    }
+  },
+  {
+    "id": "magiphysics",
+    "name": "magiphysics",
+    "require": "g.lore>=25&&g.planeslore>=15&&g.tier4>0",
+    "desc": "The universe is just an equation to solve.",
+    "level": 5,
+    "run": {
+      "stamina": 0.7
+    },
+    "result": {
+      "sp": 0.05
+    },
+    "mod": {
+	  "planeslore.rate": "2%", //meta-skill
+	  "lore.rate": "2%",
+      "research.max": 5
+    }
+  },
+  {
+    "id": "automatasculpting",
+    "name": "automata sculpting",
+    "require": "g.crafting>=18&&g.puppetry>=8&&g.animation>=6&&g.magiphysics>=5&&(g.mechanist+g.mechamancer)>0",
+    "desc": "They think, therefore they are.",
+    "level": 15,
+    "run": {
+      "stamina": 1
+    },
+    "result": {
+      "sp": 0.05
+    },
+    "mod": {
+	  "puppet.health": "1%",, //improves attack and health of puppets
+	  "puppet.attack": "1%",
+	  "machina.health": "1%",, //improves attack and health of machinae
+	  "machina.attack": "1%",
+	  "automata.health": "1%",, //improves attack and health of automata
+	  "automata.attack": "1%",
+	  "puppetry.max": "0.2",
+	  "animation.max": "0.2",
+      "minions.maxAllies": 0.25,
+      "research.max": 5
+    }
+  },
+ Classes:
+  {
+    "id": "puppeteer",
+    "name": "puppeteer",
+    "desc": "assemble and control your own minions",
+    "tags": "t_tier1",
+    "require": "g.tier0>0&&g.puppetry>=5",
+    "cost": {
+      "research": 700,
+      "arcana": 10,
+      "gold": 500,
+    },
+    "mod": {
+      "tier1": true,
+      "puppetry.max": 2,
+      "animation.max": 1,
+      "minions.maxAllies": "5",
+    },
+    "flavor": "No matter what, the strings would not break."
+  },
+ {
+    "id": "mechanist",
+    "name": "mechanist",
+    "desc": "Steel and magic",
+    "tags": "t_tier3",
+    "require": "g.tier2>0&&g.machinacreation>=5",
+    "cost": {
+      "research": 3000,
+      "arcana": 25,
+      "bloodgem": 20,
+      "airgem": 20,
+      "tomes": 10
+    },
+    "mod": {
+      "tier3": true,
+      "puppetry.max": 1,
+      "animation.max": 2,
+      "machinacreation.max": 2,
+      "minions.maxAllies": "5",
+    },
+    "flavor": "What is a man? An inefficient form of labor."
+  },
+ {
+    "id": "mechamancer",
+    "name": "mechamancer",
+    "desc": "master of the magical constructs",
+    "tags": "t_tier5",
+    "require": "g.tier3>0&&g.magiphysics>=5&&g.machinacreation>=5",
+    "cost": {
+      "research": 20000,
+      "arcana": 30,
+      "tomes": 30,
+      "runestones": 10
+    },
+    "mod": {
+      "tier5": true,
+      "puppetry.max": 1,
+      "animation.max": 1,
+      "machinacreation.max": 2,
+      "automatasculpting.max": 3,
+      "minions.maxAllies": "5",
+    },
+    "flavor": "If you want a better future, make better people."
+  },
+homes:
+  {
+    "id": "clockwork",
+    "name": "clockwork home",
+    "desc": "A large house capable of reshaping itself under the influence of it's inhabitant",
+    "cost": {
+      "research": 3000,
+      "gold": 3000,
+      "codices": 50
+    },
+    "require": "(g.puppeteer+g.mechanist+g.mechamancer)>0",
+    "mod": {
+      "minions.max": 50,
+      "space.max": "(100*g.puppeteer+150*g.mechanist+200*g.mechamancer)", //becomes larger if you take more classes of the mecha tree
+      "puppetry.max": 1,
+      "machinacreation.max": 1,
+      "automatasculpting.max": 1,
+	  "puppets.max": 20,
+	  "machinae.max": 20,
+	  "automatas.max": 20
+    }
+  },
+ 
+actions:
+  {
+    "id": "puppetshow",
+    "name": "Puppet show",
+    "desc": "Put on a show with animated puppets",
+    "verb": "Puppeteering",
+    "require": "g.puppeteer>0",
+    "length": 15,
+    "at": {
+      "10": {
+        "effect.gold": 1
+      },
+      "50": {
+        "effect.gems": 0.01
+      },
+      "100": {
+        "effect.gold": 1.5
+      },
+      "250": {
+        "effect.gems": 0.02
+      }
+    },
+    "cost": {
+      "puppets": 1
+    },
+	"run": {
+      "stamina": 0.2,
+      "spirit": 0.2
+    },
+    "effect": {
+      "gems": 0.01,
+      "gold": 4
+    },
+    "result": {
+      "puppetry.max": 0.01
+
+    }
+  },
+  {
+    "id": "assemblepuppet",
+    "name": "assemble puppet",
+    "verb": "assembling puppets",
+    "require": "g.puppetry>=1",
+    "need": "workspace",
+    "desc": "assemble a puppet.",
+    "length": 10,
+    "cost": {
+      "spiritgem": 1,
+      "gold": 50,
+      "research": 50
+    },
+    "run": {
+	
+      "stamina": 0.3,
+      "spirit": 0.3
+    },
+    "result": {
+      "puppets": 1
+    }
+  },
+  {
+    "id": "machinalabor",
+    "name": "Lease labor",
+    "desc": "Lend some of your machinae to perform menial tasks",
+    "verb": "Leasing",
+    "require": "g.mechanist>0",
+    "length": 50,
+    "at": {
+      "10": {
+        "effect.gold": 1
+      },
+      "50": {
+        "effect.gold": 1.5
+      },
+      "100": {
+        "effect.gold": 1.5
+      },
+      "250": {
+        "effect.gold": 2
+      }
+    },
+    "cost": {
+      "machinae": 1
+    },
+	"effect": {
+      "gold": 6
+	  "gems": 0.1
+    },
+    "result": {
+      "machinacreation.max": 0.01
+    }
+  },
+  {
+    "id": "assemblemachina",
+    "name": "assemble machina",
+    "verb": "assembling machinae",
+    "require": "g.machinacreation>=1",
+    "need": "workspace",
+    "desc": "assemble a machina.",
+    "length": 10,
+    "cost": {
+      "gems": 5,
+      "gold": 250,
+      "research": 400
+    },
+    "run": {
+      "stamina": 0.8,
+    },
+    "result": {
+      "machinae": 1
+    }
+  },
+  {
+    "id": "futurecouncil",
+    "name": "Plan future",
+    "desc": "Counsel with your automata to plan the future.",
+    "verb": "Counseling",
+    "require": "g.mechamancer>0",
+    "length": 100,
+    "cost": {
+      "automatas": 1
+    },
+	"run": {
+      "stamina": 4,
+      "research": 150,
+    },
+    "effect": {
+      "lore.max": 0.005,
+	  "history.max": 0.005,
+	  "charms.max": 0.005,
+	  "languages.max": 0.005
+    },
+    "result": {
+      "automatasculpting.max": 0.05
+    }
+  },
+  {
+    "id": "assembleautomata",
+    "name": "shape automata",
+    "verb": "shaping automata",
+    "require": "g.automatasculpting>=1",
+    "need": "workspace",
+    "desc": "create an automata.",
+    "length": 10,
+    "cost": {
+      "gems": 20,
+      "gold": 1000,
+      "research": 1000,
+      "bloodgem": 20,
+      "spiritgem": 20
+    },
+    "run": {
+      "stamina": 2,
+    },
+    "result": {
+      "automatas": 1
+    }
+  },
+resources:
+  {
+    "id": "puppets",
+    "name": "puppets",
+    "desc": "easily controlled, yet inert.",
+    "max": 20
+    "flavor": "A skilled user could put on a marvellous show"
+  ,
+  {
+    "id": "machinae",
+    "name": "machinae",
+    "desc": "capable of anything it's owner would want it to do.",
+    "max": 20
+    "flavor": "Beep boop."
+  },
+  {
+    "id": "automatas",
+    "name": "automata",
+    "desc": "Smart and capable of learning.",
+    "max": 20
+    "flavor": "It's not smarter than you, surely."
+  }
+ 
+upgrades:
+  {
+    "id": "proxies",
+    "name": "Puppet proxies",
+    "desc": "Throw your voice and will through specially-made puppets",
+    "require": "g.puppetry>=5",
+    "max": 1,
+    "cost": {
+      "gold": 300,
+      "research": 250
+    },
+    "mod": {
+      "stamina.rate": 0.1
+    },
+    "flavor": "Walking around is for fools"
+  },
+  {
+    "id": "proxies2",
+    "name": "proxy amplification",
+    "desc": "use your puppet proxies to amplify your memory",
+    "require": "g.puppetry>=8",
+    "max": 1,
+    "cost": {
+      "gold": 500,
+      "research": 750
+      "managem": 15
+    },
+    "mod": {
+      "spelllist.max": 10
+    },
+  },
+  {
+    "id": "puppetspies",
+    "name": "puppet spies",
+    "desc": "nobody would notice",
+    "require": "g.puppeteer>0",
+    "max": 1,
+    "cost": {
+      "gold": 500,
+      "research": 500
+      "airgem": 5
+    },
+    "mod": {
+      "concentration.max": 2
+    },
+  },
+  {
+    "id": "clockworkbutler",
+    "name": "Clockwork butler",
+    "desc": "Serves you tea, scones and books.",
+    "require": "g.machinacreation>=5",
+    "max": 1,
+    "cost": {
+      "gold": 3000,
+      "research": 2500
+    },
+    "mod": {
+      "stamina.rate": 0.1
+    },
+    "flavor": "A remarkably efficient servant"
+  },
+  {
+    "id": "autoappraiser",
+    "name": "automated appraiser",
+    "desc": "some gems are more than what they look like",
+    "require": "g.machinacreation>=10",
+    "max": 1,
+    "cost": {
+      "gold": 5000,
+      "research": 7500
+      "gems": 50
+    },
+    "mod": {
+      "gems.rate": -0.1,
+	  "managem.rate":0.001,
+	  "firegem.rate":0.001,
+	  "airgem.rate":0.001,
+	  "watergem.rate":0.001,
+	  "spiritgem.rate":0.001,
+	  "earthgem.rate":0.001,
+	  "naturegem.rate":0.001
+	  
+    }
+  },
+  {
+    "id": "autominer",
+    "name": "automated miner",
+    "desc": "greedily delve deeper",
+    "require": "g.mechanist>0",
+    "max": 1,
+    "cost": {
+      "gold": 5000,
+      "research": 7500
+      "gems": 50
+    },
+    "mod": {
+      "mine.effect.gems": 0.25,	  
+    }
+  },
+  {
+    "id": "algorithms",
+    "name": "efficient algorithms",
+    "desc": "efficient instructions for best performance",
+    "require": "g.mechanist>0",
+    "max": 1,
+    "cost": {
+      "gold": 500,
+      "research": 10000
+      "tomes": 100
+      "codices": 300
+    },
+    "mod": {
+      "autoappraiser.max": 2
+      "clockworkbutler.max": 1
+      "proxies.max": 1
+      "autominer.max": 1
+    }
+  },
+  {
+    "id": "automatalab",
+    "name": "automated laboratory",
+    "desc": "A thinking, living place of research",
+    "require": "g.automatasculpting>=5",
+    "max": 1,
+    "cost": {
+      "gold": 30000,
+      "research": 25000,
+      "automatas": 20
+    },
+    "mod": {
+      "research.rate": 50
+      "lore.rate": 200+50%
+      "history.rate": 200+50%
+      "languages.rate": 200+50%
+      "charms.rate": 200+50%
+    },
+    "flavor": "A most singular enterprise"
+  },
+  {
+    "id": "autoagents",
+    "name": "Automata agents",
+    "desc": "Those agents are capable of indepentent completion of any desired task",
+    "require": "g.automatasculpting>=15",
+    "max": 1,
+    "cost": {
+      "automata": 20,
+      "runestones": 100,
+      "firerune": 50,
+      "airrune": 50,
+      "earthrune": 50,
+      "waterrune": 50,
+      "timerune": 3,
+      "sindel": 5
+    },
+    "mod": {
+		"runner.max": 1
+    }
+  },
+  {
+    "id": "automatamastery",
+    "name": "automata mastery",
+    "desc": "a complete mastery over all things mechanical",
+    "require": "g.mechamancer>0",
+    "max": 1,
+    "cost": {
+      "gold": 25000,
+      "research": 50000
+      "tomes": 250
+      "codices": 1000
+    },
+    "mod": {
+      "automatasculpting.max": 3
+      "machinacreation.max": 5
+      "puppetry.max": 5
+      "animation.max": 5
+    }
+  },
+  {
+    "id": "masterassembler", //causes all minions to only cost half of normal cost
+    "name": "master of assembly",
+    "desc": "remarkable efficiency in creating any kind of form",
+    "require": "(g.mechamancer+g.mechanist)>0",
+    "max": 1,
+    "cost": {
+      "gold": 5000  
+    },
+    "mod": {
+      "minions.cost.multiplier": 0.5
+
+    }
+  },
+ spells: //Puppetry spells generate a permanent minion instead of a temporary one and are not meant to be memorized due to need to activate those.
+  { 
+    "id": "mk_puppet", 
+    "name": "animate puppet",
+    "school": "animation",
+    "require": "g.puppets>0",
+    "level": 8,
+    "buy": {
+      "research": 500,
+      "puppets": 5,
+    },
+    "cost": {
+      "puppets": 1,
+      "spirit": 10,
+    },
+    "effect": "puppetattacker"
+  },
+  {
+    "id": "mk_puppetshield",
+    "name": "animate shield puppet",
+    "school": "animation",
+    "require": "g.puppetry>6",
+    "level": 10,
+    "buy": {
+      "research": 1000,
+      "puppets": 10,
+      "spiritgem": 25
+    },
+    "cost": {
+      "puppets": 2,
+    },
+    "effect": "puppetshield"
+  },
+    {
+    "id": "mk_charger", 
+    "name": "assemble charger",
+    "school": "animation",
+    "require": "g.machinacreation>=5",
+    "level": 10,
+    "buy": {
+      "research": 8000,
+      "machinae": 10
+    },
+    "cost": {
+      "machinae": 1,
+    },
+    "effect": "charger"
+  },
+    {
+    "id": "mk_autoslayer",
+    "name": "Shape autoslayer",
+    "school": "animation",
+    "require": "g.automatasculpting>=5",
+    "level": 20,
+    "buy": {
+      "research": 8000,
+      "automatas": 20
+    },
+    "cost": {
+      "automatas": 2
+    },
+    "effect": "autoslayer"
+  },
+{
+    "id": "mk_autoprotector", 
+    "name": "Shape autoprotector",
+    "school": "animation",
+    "require": "g.automatasculpting>=5",
+    "level": 20,
+    "buy": {
+      "research": 8000,
+      "automatas": 20
+    },
+    "cost": {
+      "automatas": 2
+    },
+    "effect": "autoprotector"
+  },
+
+  
+  
+  minions:
+  //used a monster template here. Minions are tagged according to type, for skill effects
+    {
+    "id": "puppetshield",
+	"tags": "puppet",
+    "name": "Shielder",
+    "level": 12,
+    "evil": 50,
+    "kind": "Puppet", 
+    "hp": 250,
+    "tohit": -20,
+    "defense": 80,
+    "attack": [
+      {
+        "name": "bulwark",
+        "targets": "player",
+        "dot": { // does nothing except cast Bulwark on you. Bulwark is an effect that causes all damage (but not HP loss, such as from actions) sustained by target to be transferred to the caster. If multiple casters are present, the damage is inflicted to each, just to ensure that having 7 tanks at once is not the strat.
+			"duration": 20,
+			"effect":  {
+				"bulwark": 1
+			}
+        }
+      }
+    ]
+  },
+      {
+    "id": "puppetattacker",
+	"tags": "puppet",
+    "name": "Aggressor",
+    "level": 15,
+    "evil": 50,
+    "kind": "Puppet", 
+    "hp": 200, 
+    "tohit": 10,
+    "defense": 20,
+    "attack": [
+      {
+        "name": "Slash",
+		"kind": "slashing",
+		"dmg": "30~50"
+      }
+    ]
+  },
+      {
+    "id": "charger", 
+	"tags": "machina",
+    "name": "Charger",
+    "level": 15,
+    "evil": 50,
+    "kind": "machina", 
+    "hp": 500,
+    "tohit": 20,
+    "defense": 200,
+    "attack": [ 
+      {
+        "name": "Charge", //only used if recoil is not present
+        "targets": "enemies",
+        "dot": {
+          "duration": 10,
+		  "effect": {
+			"dmg": "80~110"
+		  }
+        }
+      },
+      {
+        "name": "Recoil", //only used after using Charge
+        "targets": "self",
+        "dot": {
+          "duration": 10,
+		  "mod": {
+			"defense": -150
+		  }
+        }
+      }
+   
+    ]
+  },
+      {
+    "id": "autoslayer",
+	"tags": "automata",
+    "name": "Autoslayer",
+    "level": 18,
+    "evil": 50,
+    "kind": "automata",
+    "hp": 700,
+    "tohit": 20,
+    "defense": 150,
+    "regen": 10,
+    "attack": [
+      {
+        "name": "Bleed dry",
+        "targets": "enemies",
+        "dot": {
+          "kind": "Bleed",
+          "duration": 30,
+          "dmg": "50"
+        }
+      },
+      {
+        "name": "Slice",
+        "tohit": 10,
+        "kind": "Slashing",
+        "dmg": "120~150"
+      }
+    ]
+  },
+      {
+    "id": "autoprotector",
+	"tags": "automata",
+    "name": "Hulking abomination",
+    "level": 20,
+    "evil": 50,
+    "kind": "automata", 
+    "hp": 1200
+    "defense": 250,
+    "regen": 25,
+    "attack": [
+      {
+        "name": "bulwark",
+        "targets": "player",
+        "dot": { //same as shielder
+			"duration": 20,
+			"effect":  {
+				"bulwark": 1
+			}
+        }
+      },
+      {
+        "name": "Smoke bomb",
+        "dot": {
+          "duration": 10,
+		  "mod": {
+			"defense": -50
+			"tohit": -20
+		  }
+      }
+    ],
+    "death": [ //this occurs when the minion dies
+      {
+        "name": "core overload",
+        "targets": "enemies",
+        "tohit": 100,
+        "kind": "air",
+        "dmg": "200"
+      }
+    ]
+  }

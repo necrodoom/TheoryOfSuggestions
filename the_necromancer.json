@@ -1,0 +1,388 @@
+actions:
+	{
+
+		"id":"createhusk",
+		"name":"Create husk",
+		"desc":"Imbue a dead body with a bound soul",
+		"verb":"Husk creation",
+		"require":"g.necromancy>0",
+		"length":5,
+		"cost":{
+			"bodies":1,
+			"souls":1
+		},
+		"run":{
+			"stamina":3,
+			"hp":10,
+			"shadow":3
+		},
+		"result":{
+			"husk":1
+		}
+
+	},
+	{
+
+		"id":"makescythe", //creates a weapon
+		"name":"Reaper's scythe",
+		"desc":"A scythe worthy of the grim reaper",
+		"verb":"Sowing",
+		"require":"g.necromancy>15",
+		"length":180,
+		"cost":{
+			"shadowgem":200,
+			"spiritgem":200,
+			"souls":100,
+			"husk":50,
+			"sindel":3,
+			"ichor":5
+		},
+		"run":{
+			"stamina":4,
+			"hp":15
+		},
+		"result":{
+			"reaperscythe":1
+		}
+
+	},
+weapons:
+  {
+    "id": "reaperscythe", //this cannot have a material associated with it.
+    "attack": {
+      "kind": "slash",
+      "damage": "40~50"
+	  "tohit": "10"
+    },
+    "kill": { //this executes if the damage is lethal. This specifically creates 1 husk if it kills the target.
+      "husk":1
+    },
+    "hands": 2,
+    "kind": "scythe",
+    "level": 18,
+    "cost": 5000
+  }
+resources:
+  {
+    "id": "husk",
+    "name": "Husks",
+    "desc": "will do your bidding even if it kills them.",
+    "max": special //the max of husks is the minimum of souls.max+husks and bodies.max+husks. So if you can have 50 souls max, 20 bodies max and already have 10 husks you can have up to 30 total.
+    "mod": { //and here is why the +husks is there - to ensure the max does not change as it eats at your maxsouls and maxbodies.
+      "bodies.max": -1
+	  "souls.max": -1
+    },
+    "flavor": "it's not wrong."
+  }
+  spells: //when evaluating those, remember that each husk is approx a 1 floorspace penalty due to needing caskets/vats to hold the bodies. If you can also make those unsellable if they would make the max negative that would be A+.
+  { //all necromancer spells make permanent minions, not summons.
+    "id": "mk_meat", //tank spell of a necromancer
+    "name": "Stitch meat",
+    "school": "shadow",
+    "require": "g.necromancy>4",
+    "level": 8,
+    "buy": {
+      "research": 500,
+      "husk": 5,
+      "shadowgem": 15
+    },
+    "cost": {
+      "husk": 5,
+      "shadow": 10,
+    },
+    "effect": "meatpile"
+  },
+  {
+    "id": "mk_horror", //attacker spell of a necromancer
+    "name": "Raise Horror",
+    "school": "shadow",
+    "require": "g.necromancy>7",
+    "level": 10,
+    "buy": {
+      "research": 1000,
+      "husk": 10,
+      "shadowgem": 25
+    },
+    "cost": {
+      "husk": 10,
+      "shadow": 15,
+    },
+    "effect": "horror"
+  },
+    {
+    "id": "mk_zenchanter", //supporter spell of a necromancer
+    "name": "Undead enchanter",
+    "school": "shadow",
+    "require": "g.necromancy>9&&g.enchanting>7",
+    "level": 10,
+    "buy": {
+      "research": 8000,
+      "husk": 10,
+      "shadowgem": 25
+    },
+    "cost": {
+      "husk": 10,
+      "shadow": 15,
+    },
+    "effect": "zenchanter"
+  },
+    {
+    "id": "mk_spewer", //attacker 2 spell of a necromancer
+    "name": "Bile spewer",
+    "school": "shadow",
+    "require": "g.necromancy>10",
+    "level": 20,
+    "buy": {
+      "research": 8000,
+      "husk": 25,
+      "shadowgem": 25
+    },
+    "cost": {
+      "husk": 25,
+      "shadow": 15,
+    },
+    "effect": "spewer"
+  },
+{
+    "id": "mk_abomination", //tank 2 spell of a necromancer
+    "name": "Assemble abomination",
+    "school": "shadow",
+    "require": "g.necromancy>13",
+    "level": 20,
+    "buy": {
+      "research": 8000,
+      "husk": 25,
+      "shadowgem": 25
+    },
+    "cost": {
+      "husk": 25,
+      "shadow": 15,
+    },
+    "effect": "abomination"
+  },
+{
+    "id": "mk_reaper", //ultimate spell of a necromancer
+    "name": "Reaper",
+    "school": "shadow",
+    "require": "g.necromancy>17",
+    "level": 25,
+    "buy": {
+      "reaperscythe": 1 //yes, researching it costs you a scythe.
+    },
+    "cost": {
+      "husk": 50,
+      "sindel": 1,
+    },
+    "effect": "reaper"
+  },
+  {
+    "id": "reap", //a small bonus to go with the scythe
+    "name": "Reap harvest",
+    "school": "shadow",
+    "require": "reaperscythe>0", //unlocks if you have a scythe and does not need to be bought. Can only be cast if you are wearing the scythe but i'm not sure how to specify that.
+    "level": 10,
+    "cost": {
+      "stamina": 1,
+    },
+    "effect": "twinstrike" //attacks twice with the equipped weapon. Triggers on-kills.
+  },
+  
+  
+  minions:
+  //used a monster template here. 
+    {
+    "id": "meatpile",
+    "name": "Pile of meat",
+    "level": 12,
+    "evil": 50,//leaving all at 50 as i have no idea what it affects. Necromancer summons should be p evil tho.
+    "kind": "Husk", //necro's summons get their own typing.
+    "hp": 200,
+    "tohit": -20,
+    "defense": 50,
+    "regen": 5,
+    "attack": [
+      {
+        "name": "bulwark",
+        "targets": "player",
+        "dot": { //meat piles do nothing except cast Bulwark on you. Bulwark is an effect that causes all damage (but not HP loss, such as from actions) sustained by target to be transferred to the caster. If multiple casters are present, the damage is inflicted to each, just to ensure that having 7 tanks at once is not the strat.
+			"duration": 20,
+			"effect":  {
+				"bulwark": 1
+			}
+        }
+      }
+    ]
+  },
+      {
+    "id": "horror",
+    "name": "Shrieking Horror",
+    "level": 15,
+    "evil": 50,//leaving all at 50 as i have no idea what it affects. Necromancer summons should be p evil tho.
+    "kind": "Husk", //necro's summons get their own typing.
+    "hp": 200, //same HP as pile, as while not a tank, this is meant to be a higher-tier minion and it doesn't get regen.
+    "tohit": 10,
+    "defense": 20,
+    "attack": [
+      {
+        "name": "Shriek",
+		"kind": "sonic",
+		"duration": 20,
+		"dmg": "20~40"
+      }
+    ]
+  },
+      {
+    "id": "zenchanter", //a buffing minion, which provides buffs to the player, enabling them to forgo memorizing spells in favor of slashing things with the scythe
+    "name": "Zombie enchanter",
+    "level": 15,
+    "evil": 50,//leaving all at 50 as i have no idea what it affects. Necromancer summons should be p evil tho.
+    "kind": "Husk", //necro's summons get their own typing.
+    "hp": 150,
+    "tohit": -20,
+    "defense": 100, //simulates staying in the backline
+    "regen": 10,
+    "attack": [ //attacks are cast in order, much like memorized spells
+      {
+        "name": "Invigorate",
+        "targets": "player",
+        "dot": {
+          "duration": 20,
+		  "effect": {
+			"stamina": 0.2
+		  }
+        }
+      },
+      {
+        "name": "Close wounds",
+        "targets": "player",
+		  "effect": {
+			"hp": 50
+		  }
+      },
+      {
+        "name": "Reinforce",
+        "targets": "player",
+          "duration": 20,
+		  "effect": {
+			"shadow": 5,
+			"spirit": 5,
+			"element": 2
+		  }
+      },
+      {
+        "name": "Cheer",
+        "targets": "player",
+        "dot": {
+          "duration": 20,
+		  "mod": {
+			"speed": 1
+		  }
+        }
+      },
+      {
+        "name": "Protect",
+        "targets": "player",
+        "dot": {
+          "duration": 20,
+		  "mod": {
+			"player.defense": 10
+		  }
+        }
+      },
+    ]
+  },
+      {
+    "id": "spewer",
+    "name": "Bile spewer",
+    "level": 18,
+    "evil": 50,//leaving all at 50 as i have no idea what it affects. Necromancer summons should be p evil tho.
+    "kind": "Husk", //necro's summons get their own typing.
+    "hp": 400,
+    "tohit": 10,
+    "defense": 70,
+    "regen": 5,
+    "attack": [
+      {
+        "name": "Vile bile",
+        "targets": "enemies",
+        "dot": {
+          "kind": "bile",
+          "duration": 30,
+          "dmg": "30"
+        }
+      },
+      {
+        "name": "Melt",
+        "tohit": 10,
+        "kind": "bile",
+        "dmg": "80"
+      }
+    ]
+  },
+      {
+    "id": "abomination",
+    "name": "Hulking abomination",
+    "level": 20,
+    "evil": 50,//leaving all at 50 as i have no idea what it affects. Necromancer summons should be p evil tho.
+    "kind": "Husk", //necro's summons get their own typing.
+    "hp": 800
+    "defense": 150,
+    "regen": 20,
+    "attack": [
+      {
+        "name": "bulwark",
+        "targets": "player",
+        "dot": { //same as meat pile one
+			"duration": 20,
+			"effect":  {
+				"bulwark": 1
+			}
+        }
+      },
+      {
+        "name": "slam",
+        "tohit": 15,
+        "kind": "blunt",
+        "dmg": "30~40"
+      }
+    ],
+    "death": [ //this occurs when the minion dies
+      {
+        "name": "cloud of flies",
+        "targets": "enemies",
+        "tohit": 100,
+        "kind": "nature",
+        "dmg": "150"
+      }
+    ]
+  },
+      {
+    "id": "reaper",
+    "name": "Reaper",
+    "level": 40,
+    "evil": 50,//leaving all at 50 as i have no idea what it affects. Necromancer summons should be p evil tho.
+    "desc": "the pinnacle of necromancer's art, this amalgamation of souls and bodies is unstable yet devastating.",
+    "flavor": "powered by the searing light of a star.",  
+	"kind": "Husk", //necro's summons get their own typing.
+    "hp": 10000,
+    "tohit": 50,
+    "defense": 200,
+    "regen": -100,
+    "attack": [
+      {
+        "name": "presence of death",
+        "targets": "enemies",
+        "dot": {
+          "kind": "death",
+          "duration": 500,
+          "dmg": "50~80"
+        }
+      },
+      {
+        "name": "reap",
+        "tohit": 50,
+        "kind": "death",
+        "dmg": "150~300"
+      }
+    ]
+  }
