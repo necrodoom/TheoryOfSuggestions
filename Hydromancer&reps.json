@@ -1,0 +1,1395 @@
+Forms: //you may only have 1 form at a time. This is functionally an upgrade.
+  {
+    "id": "form_lich",
+    "name": "lich",
+    "actname": "rite of undeath",
+    "desc": "obtain immortality by becoming a lich",
+    "require": "g.crafting>=20&&g.necromancy>=9&&g.phylactory>0&&g.form==0",
+    "repeat": false,
+    "length": 50,
+    "cost": {
+      "research": 4000,
+      "shadowgem": 20,
+      "spiritgem": 20
+    },
+    "run": {
+      "shadow": 2,
+      "spirit": 1,
+      "mana": 1,
+      "hp": 2
+    },
+    "result": {
+      "title": "lich"
+    },
+    "mod": {
+      "lore.max": 1,
+      "hp.rate": 0.2,
+      "player.bonuses.shadow": 3,
+      "player.hits.shadow": 3,
+      "player.resist.shadow": "5%",
+      "resist.light": -100
+	  "player.form": true,
+	  "player.lich": true
+    }
+  },
+    {
+    "id": "form_human",
+    "name": "perfect form",
+    "actname": "perfect body",
+    "desc": "the only way to perfection is through improving your human body.",
+    "require": "g.anatomy>=5&&g.lore>=35&&g.tier5>0&&g.form==0&&g.evil==0",
+    "repeat": false,
+    "length": 50,
+    "cost": {
+      "research": 4000,
+      "bloodgem": 20,
+      "earthgem": 20
+    },
+    "run": {
+      "hp": 10,
+      "earth": 1,
+      "mana": 1,
+      "stamina": 5
+    },
+    "result": {
+      "title": "paragon"
+    },
+    "mod": {
+      "lore.max": 1,
+      "stamina.rate": 0.2,
+      "player.bonuses.pierce": 3,
+      "player.hits.pierce": 3,
+      "player.resist.pierce": "5%",
+      "player.bonuses.blunt": 3,
+      "player.hits.blunt": 3,
+      "player.resist.blunt": "5%",
+      "player.bonuses.slash": 3,
+      "player.hits.slash": 3,
+      "player.resist.slash": "5%",
+	  "player.form": true,
+	  "player.paragon": true
+    }
+  },
+    {
+    "id": "form_aquatic",
+    "name": "Underwater adaptation",
+    "actname": "Underwater adaptation",
+    "desc": "adapt to living underwater. Fins, gills and webbed feet included",
+    "require": "g.waterlore>=25||(g.hydromancer+g.rainmaker+g.seawhisperer)>0&&g.form==0",
+    "repeat": false,
+    "length": 50,
+    "cost": {
+      "research": 4000,
+      "shadowgem": 20,
+      "spiritgem": 20
+    },
+    "run": {
+      "water": 2,
+      "spirit": 1,
+      "mana": 1,
+      "hp": 2
+    },
+    "result": {
+      "title": "merman"
+    },
+    "mod": {
+      "waterlore.max": 1,
+      "water.rate": 0.2,
+      "player.bonuses.water": 3,
+      "player.hits.water": 3,
+      "player.resist.water": "5%",
+      "resist.air": -100
+	  "player.form": true,
+	  "player.aquatic": true
+    }
+  },
+  
+  factions: //hall-wide faction reputations, presented elsewhere.
+  
+      {
+    "id": "fact_kingdom",
+    "name": "Local kingdom",
+    "desc": "a kingdom where your wizard hall is located. Improving it's prosperity will increase the quality of new apprentices and your hall prestige.",
+    "require": "g.wizardhall", //the account-wide unlock, not the upgrade.Unlocking it allows you to see the rep and do the rep actions.
+    "maxrep": 100 //maximum reputation.
+  },
+        {
+    "id": "fact_aquatic",
+    "name": "Denizens of the depths",
+    "desc": "Underwater creatures forming multiple loose communities. Capable of supplying you with exotic ingredients.",
+    "require": "g.wizardhall&&g.form_aquatic", rep unlocks are account-wide, so even non-aquatic wizards can see that rep even if they might be incapable of raising it.
+    "maxrep": 100 //maximum reputation.
+  },
+   faction unlocks: //milestone-based faction unlocks. Can be hall upgrades, or account-wide upgrade unlocks.  
+      
+      {
+        "id": "kingdom_1", //apprentices start with 5 codices and 1 tome.
+        "name": "Apprenticeship endowment",
+        "desc": "Provide all new apprentices with study materials.",
+        "require": "fact_kingdom.rep>=20",
+        "max": 1,
+        "cost": {
+          "prestige": 10
+        },
+        "mod": {
+          "apprentice.mod.effect.codices": 5,
+          "apprentice.mod.effect.tomes": 1
+        }
+      },
+      {
+        "id": "kingdom_2", //wizard hall retains 10% of retired wizard's prestige
+        "name": "Museum",
+        "desc": "A place to honor the achievements of hall members.",
+        "require": "fact_kingdom.rep>=40",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+          "wizardhall.retention": 10
+        }
+      },	  
+       {
+        "id": "kingdom_3", //aprrentices gain access to nicer homes
+        "name": "Campus",
+        "desc": "A dedicated area for housing the prospective mages.",
+        "require": "fact_kingdom.rep>=60",
+        "max": 1,
+        "cost": {
+          "prestige": 30
+        },
+        "mod": {
+          "wizardhall.apprenticehousing": true
+        }
+      },	
+       {
+        "id": "kingdom_4", //30% more retention
+        "name": "Hall of records",
+        "desc": "Records detailed information about the lives of hall's wizards.",
+        "require": "fact_kingdom.rep>=80",
+        "max": 1,
+        "cost": {
+          "prestige": 40
+        },
+        "mod": {
+          "wizardhall.retention": 30
+        }
+      },	
+       {
+        "id": "kingdom_5", //apprentices gain a substantial subsidy.
+        "name": "Royal subsidies",
+        "desc": "All apprenticeship fees are paid by the crown and all wizards get a royal stipend.",
+        "require": "fact_kingdom.rep>=100",
+        "max": 1,
+        "cost": {
+          "prestige": 50
+        },
+        "mod": {
+          "gold.rate": 0.2,
+          "apprentice.mod.cost.gold": -20,
+          "falconer.mod.cost.gold": -100,
+		  "herbalist.mod.cost.gold": -100,
+		  "scribe.mod.cost.gold": -100,
+		  "neophyte.mod.cost.gold": -175,
+		  "leavemaster.mod.cost.gold": -200
+        }
+      },
+      {
+        "id": "aquatic_1", //Normal upgrade.
+        "name": "Deep clay",
+        "desc": "Secure a supply of deep sea clay.",
+        "require": "fact_aquatic.rep>=20&&g.tier0>0",
+        "max": 1,
+        "cost": {
+          "gold": 200
+        },
+        "mod": {
+          "crafting.max": 2,
+          "water.rate": 0.1,
+		  "water.max": 1,
+          "earth.rate": 0.1,
+		  "earth.max": 1
+        }
+      },
+      {
+        "id": "aquatic_2", //Normal upgrade.
+        "name": "Deep trade",
+        "desc": "Establish trade contacts with the depth-dwellers.",
+        "require": "fact_aquatic.rep>=400&&g.tier1>0",
+        "max": 1,
+        "cost": {
+          "water":15,
+		  "gems":20
+        },
+        "mod": {
+          "gold.rate": 0.5,
+		  "abyssstones.rate":0.01
+        }
+      },	  
+       {
+        "id": "aquatic_3", //hall upgrade
+        "name": "Aquatic embassy",
+        "desc": "Situated on a coast, it allows aquatic creatures to parlay with land-walkers.",
+        "require": "fact_aquatic.rep>=60",
+        "max": 1,
+        "cost": {
+          "prestige": 30
+        },
+        "mod": {
+          "wizardhall.aquaticembassy": true
+        }
+      },	
+       {
+        "id": "aquatic_4", //hall upgrade
+        "name": "Knowledge sharing",
+        "desc": "Establish student exchange programs with aquatic denizens.",
+        "require": "fact_aquatic.rep>=80",
+        "max": 1,
+        "cost": {
+          "prestige": 40
+        },
+        "mod": {
+          "wizardhall.aquaticstudies": true
+        }
+      },	
+       {
+        "id": "aquatic_5", //normal upgrade. Unlocks Abyss as an adventure location
+        "name": "Abyss expeditions",
+        "desc": "Organize joint expeditions to the deepest ocean Abyss.",
+        "require": "fact_aquatic.rep>=100&&tier4>0&&g.aquatic>0",
+        "max": 1,
+        "cost": {
+          "gold": 10000,
+		  "gems": 100,
+		  "watergem": 50,
+		  "waterrune": 10
+        },
+        "mod": {
+          "abyssstones.rate": 0.04,
+		  "dist":"30%"
+
+        }
+      },	
+Rep actions:
+// this section includes rep actions and the capstone rewards. Rep actions are actions, capstones can be hall-wide upgrades or hall upgrades.
+  {
+    "id": "quellland",
+    "name": "Quell land",
+    "desc": "Alter the local plate tectonics to prevent earthquakes",
+    "verb": "Quelling",
+    "require": "g.titan>0&&g.paragon>0", //you can only get kingdom rep as a human, they ain't gonna trust a rando lich/merperson.
+    "perpetual":true,
+	"run": {
+      "stamina": 1,
+      "earth": 1,
+	  "earthrune":0.01,
+	  "earthgem": 0.04
+    },
+    "effect": {
+	"capped": {
+		"fact_kingdom.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "kingdom_earth_cap", //hall upgrade, capstone of land quelling.
+        "name": "Bustling cities",
+        "desc": "Large cities lead to many money-making opportunities.",
+        "require": "quellland.capped.total==20",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+          "earthlore.max": 2,
+		  "cleanstables.effect.gold": 0.2,
+		  "errands.effect.gold": 0.5,
+		  "chores.effect.gold": 0.3
+        }
+      },
+  {
+    "id": "compilehistory",
+    "name": "Compile history",
+    "desc": "Restore the history of the kingdom",
+    "verb": "Compiling",
+    "require": "g.history>=10&&g.paragon>0&&tier6>0", //you can only get kingdom rep as a human, they ain't gonna trust a rando lich/merperson.
+    "perpetual":true,
+	"run": {
+      "stamina": 1,
+	  "research":75,
+	  "tomes":0.02,
+	  "codices": 0.15
+    },
+    "effect": {
+	"capped": {
+		"fact_kingdom.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "kingdom_history_cap", //hall upgrade, capstone of history compiling.
+        "name": "The complete history of the kingdom",
+        "desc": "The entire work takes the space usually reserved for a small library. Owning a copy is seen as a sign of great prestige.",
+        "require": "compilehistory.capped.total==20",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+          "worldlore.max": 2,
+		  "wizardhall.retention":10
+        }
+      },	
+  {
+    "id": "reactivateleylines",
+    "name": "Reactivate leylines",
+    "desc": "The arcane conduits have long since lain dormant.",
+    "verb": "Leyline wizarding",
+    "require": "g.astronomy>=30&&g.planeslore>=25&&g.paragon>0&&tier6>0", //you can only get kingdom rep as a human, they ain't gonna trust a rando lich/merperson.
+    "perpetual":true,
+	"run": {
+      "stamina": 1,
+	  "research":75,
+	  "mana":2.5,
+	  "manas": 1
+    },
+    "effect": {
+	"capped": {
+		"fact_kingdom.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "kingdom_astronomy_cap", //normal upgrade, capstone of leyline reactivation.
+        "name": "Tap leyline",
+        "desc": "Tap into the kingdom's leylines to supplement your magic.",
+        "require": "reactivateleylines.capped.total==20",
+        "max": 1,
+        "cost": {
+          "mana": 15,
+		  "tomes": 5
+        },
+        "mod": {
+          "astronomy.max": 2,
+		  "manas.rate":0.1,
+		  "mana.rate":0.2
+        }
+      },	
+  {
+    "id": "enddroughts",
+    "name": "Put an end to droughts",
+    "desc": "Reorganize the water flow in the kingdom to prevent droughts.",
+    "verb": "Aquamancing",
+    "require": "g.seawhisperer>0&&g.paragon>0", //you can only get kingdom rep as a human, they ain't gonna trust a rando lich/merperson.
+    "perpetual":true,
+	"run": {
+      "stamina": 1,
+	  "water": 2,
+	  "watergem":0.04,
+	  "waterrune": 0.01
+    },
+    "effect": {
+	"capped": {
+		"fact_kingdom.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "kingdom_water_cap", //hall upgrade, capstone of ending droughts.
+        "name": "Wizarding villages",
+        "desc": "Supported by local farmers, those villages house fledgling graduates before they procure their own home.",
+        "require": "enddroughts.capped.total==20",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+          "waterlore.max": 2,
+		  "wizardhall.graduationhousing":true //upon graduation, instead of going to the inn, move to a cottage instead.
+		  }
+      },
+  {
+    "id": "hazardmitigation",
+    "name": "Automate hazardous labor",
+    "desc": "Provide some of your automata and machinae to replace humans in life-threatening jobs.",
+    "verb": "Automating",
+    "require": "g.mechamancer>0&&g.paragon>0&&tier6>0", //you can only get kingdom rep as a human, they ain't gonna trust a rando lich/merperson.
+    "perpetual":true,
+	"run": {
+      "stamina": 1,
+	  "machinaes":0.01,
+	  "automatas": 0.002
+    },
+    "effect": {
+	"capped": {
+		"fact_kingdom.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "kingdom_automation_cap", //hall upgrade, capstone of automating labor.
+        "name": "Hall of the learned",
+        "desc": "With the prosperity brought on by automation, part of the population turned to deeper learning.",
+        "require": "hazardmitigation.capped.total==20",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+          "automatasculpting.max": 2,
+		  "machinacreation.max": 2,
+		  "puppetry.max": 2,
+		  "buyscroll.mod.cost.gold":-3, //buying scrolls is 3 gold cheaper.
+		  "bindcodex.mod.cost.scrolls":-2 //binding codices needs 2 less scrolls.
+		  }
+      },	
+  {
+    "id": "swordmastership",
+    "name": "Create military schools",
+    "desc": "Train a new generation of instructors in the arts of spell and blade.",
+    "verb": "Training instructors",
+    "require": "g.eldritchknight>0&&g.paragon>0", //you can only get kingdom rep as a human, they ain't gonna trust a rando lich/merperson.
+    "perpetual":true,
+	"run": {
+      "stamina": 3,
+	  "bloodgem":0.05
+    },
+    "effect": {
+	"capped": {
+		"fact_kingdom.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "kingdom_spellblade_cap", //hall upgrade, capstone of new military schools.
+        "name": "Military academies",
+        "desc": "The cadets from spellblade academies make for perfect apprentices.",
+        "require": "swordmastership.capped.total==20",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+          "bladelore.max": 2, //doubles the effect of the apprentice furniture
+		  "up_apprentice.mod.gold.rate":0.1,
+		  "up_apprentice.mod.scrolls.rate":0.02,
+		  "up_apprentice.mod.codices.rate":0.01,
+		  "up_apprentice.mod.tomes.rate":0.001
+		  }
+      },	
+  {
+    "id": "transformsteppe",
+    "name": "Revitalize steppe",
+    "desc": "Plant forests and protective greenery to make steppe fertile again.",
+    "verb": "Re-greening",
+    "require": "g.highkell>0&&g.paragon>0", //you can only get kingdom rep as a human, they ain't gonna trust a rando lich/merperson.
+    "perpetual":true,
+	"run": {
+     "stamina": 1,
+	  "nature": 2
+	  "naturegem":0.06
+    },
+    "effect": {
+	"capped": {
+		"fact_kingdom.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "kingdom_nature_cap", //hall upgrade, capstone of revitalized steppe.
+        "name": "Serene forests",
+        "desc": "The new forests, free from monsters and dark creatures, are perfect for meditation.",
+        "require": "transformsteppe.capped.total==20",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+          "naturelore.max": 2 //unlocks a new rest
+		  }
+      },	
+  {
+    "id": "naturecaprest",
+    "tags": "t_rest",
+    "name": "meditate",
+    "slot": "rest",
+    "owned": true,
+    "verb": "meditating",
+    "desc": "meditate to gain understanding of higher matters",
+    "perpetual": true,
+    "require": "g.kingdom_nature_cap>0",
+    "fill": [
+      "hp",
+      "manas",
+      "stamina",
+      "stress"
+    ],
+    "effect": {
+      "stress": -2,
+      "manas": {
+        "skipLocked": true,
+        "value": 0.9
+      },
+      "stamina": 0.8,
+      "hp": 1,
+      "lore.max": 0.001,
+	  "sp": 0.0001
+    }
+  }, 	  
+  {
+    "id": "scrollofdetection",
+    "name": "Create scroll of detection",
+    "desc": "Create a scroll that detects and records the details of any denizen with unusual aptitude for magics.",
+    "verb": "Enchanting scroll",
+    "require": "g.wizard3>0&&g.paragon>0", //you can only get kingdom rep as a human, they ain't gonna trust a rando lich/merperson.
+    "perpetual":true,
+	"run": {
+     "stamina": 1,
+	  "mana": 2
+	  "managem":0.06
+    },
+    "effect": {
+	"capped": {
+		"fact_kingdom.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "kingdom_wizardry_cap", //hall upgrade, capstone of scroll of detection.
+        "name": "Quality recruits",
+        "desc": "Those with unusual aptitude are directly invited to apprentice in the hall.",
+        "require": "scrollofdetection.capped.total==20",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+          "lore.max": 2,
+		  "mysticism.max": 2,
+		  "manas.max": 3,
+		  "voidlore.max": 1
+		  }
+      },  
+  {
+    "id": "volcanomanagement",
+    "name": "Direct volcanoes",
+    "desc": "Create a way to control underwater volcanic eruptions for efficient heat and sulphur harvesting.",
+    "verb": "Managing eruptions",
+    "require": "g.firet6>0&&g.aquatic>0", //you can only get aquatic rep as a merman, as it requires you to stay underwater for a while.
+    "perpetual":true,
+	"run": {
+      "stamina": 1,
+      "fire": 1,
+	  "firerune":0.01,
+	  "firegem": 0.04
+    },
+    "effect": {
+	"capped": {
+		"fact_aquatic.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "aquatic_fire_cap", //normal upgrade, capstone of volcano control.
+        "name": "Brimstone trove",
+        "desc": "Secure a large trove of brimstone for alchemical experimentation.",
+        "require": "volcanomanagement.capped.total==20",
+        "max": 1,
+        "cost": {
+          "gold": 1500
+        },
+        "mod": {
+          "firelore.max": 2,
+		  "alchemy.max": 2,
+          "potions.max": 2,
+		  "fire.rate": 0.2
+        }
+      },
+  {
+    "id": "necromanticworkforce",
+    "name": "Necromantic workforce",
+    "desc": "Provide husks to perform underwater labor.",
+    "verb": "Transferring the dead",
+    "require": "g.necro3>0&&g.lich>0&&wizardhall.aquaticembassy>0", //an exception to the merman rule, this is accomplished as a lich, though you need an embassy for that
+    "perpetual":true,
+	"run": {
+      "stamina": 1,
+      "spirit": 1,
+	  "husk":0.1,
+    },
+    "effect": {
+	"capped": {
+		"fact_aquatic.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "aquatic_necro_cap", //normal upgrade, capstone of necromantic labor.
+        "name": "Underwater gardens",
+        "desc": "Rent an underwater garden to grow unusual plants. The gardeners also double as fertilizer.",
+        "require": "necromanticworkforce.capped.total==20",
+        "max": 1,
+        "cost": {
+          "gold": 2500
+        },
+        "mod": {
+          "necromancy.max": 2,
+		  "alchemy.max": 2,
+		  "herbs.rate": 1
+		  "herbs.max": 20
+		  "souls.rate":0.01
+		  "souls.max.rate":0.0001
+        }
+      },
+   {
+    "id": "underwaterfarming",
+    "name": "Establish underwater herding",
+    "desc": "Invent a way to herd underwater animals for meat and products.",
+    "verb": "Herding",
+    "require": "g.highkell>0&&g.aquatic>0", //you can only get aquatic rep as a merman, as it requires you to stay underwater for a while.
+    "perpetual":true,
+	"run": {
+      "stamina": 1,
+      "nature": 1,
+	  "naturegem":0.06
+    },
+    "effect": {
+	"capped": {
+		"fact_aquatic.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "aquatic_nature_cap", //normal upgrade, capstone of underwater herding.
+        "name": "Ocean's bounty",
+        "desc": "Incredible assortment of ocean's plants and meats, regularily delivered to you.",
+        "require": "underwaterfarming.capped.total==20",
+        "max": 1,
+        "cost": {
+          "gold": 1000
+        },
+        "mod": {
+		  "naturelore.max": 2,
+          "gold.rate": -0.15,
+		  "hp.rate": 2,
+          "stamina.rate": 0.5
+        }
+      },	
+    {
+    "id": "redirectcurrents",
+    "name": "Redirect currents",
+    "desc": "Redirect the currents to reduce the chances of tsunamis.",
+    "verb": "Redirecting",
+    "require": "g.seawhisperer>0", //sea whisperers get a special boon of not needing aquatic and can do both reps at once.
+    "perpetual":true,
+	"run": {
+      "stamina": 1,
+      "water": 1,
+	  "watergem":0.04
+	  "waterrune":0.01
+    },
+    "effect": {
+	"capped": {
+		"fact_aquatic.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "aquatic_water_cap", //hall upgrade, capstone of redirecting currents.
+        "name": "Safe coasts",
+        "desc": "With the currents no longer treacherous, sea trade booms.",
+        "require": "redirectcurrents.capped.total==20",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+		  "waterlore.max": 2,
+          "gold.rate": 0.2,
+		  "abyssstones.rate": 0.01
+        }
+      },	
+   {
+    "id": "stormsoothing",
+    "name": "Calm storms",
+    "desc": "The raging storms can render entire regions dangerous.",
+    "verb": "Soothing",
+    "require": "g.airt6>0&&g.aquatic>0", //you can only get aquatic rep as a merman, as it requires you to stay underwater for a while.
+    "perpetual":true,
+	"run": {
+      "stamina": 1,
+      "air": 1,
+	  "airgem":0.04,
+	  "airrune":0.01
+    },
+    "effect": {
+	"capped": {
+		"fact_aquatic.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "aquatic_air_cap", //normal upgrade, capstone of storm calming.
+        "name": "Voyage",
+        "desc": "With the seas calm, you can use them to traverse distances easily.",
+        "require": "stormsoothing.capped.total==20",
+        "max": 1,
+        "cost": {
+          "gold": 20000
+        },
+        "mod": {
+		  "airlore.max": 2,
+          "dist": "30%"
+        }
+      },	
+    {
+    "id": "abysswarning",
+    "name": "Abyss warning system",
+    "desc": "Create a self-updating timetable for abyssal eruptions.",
+    "verb": "Divining",
+    "require": "g.astralseer>0&&g.aquatic>0", //you can only get aquatic rep as a merman, as it requires you to stay underwater for a while.
+    "perpetual":true,
+	"run": {
+      "stamina": 2,
+      "manas": 1,
+	  "sindel":0.002
+    },
+    "effect": {
+	"capped": {
+		"fact_aquatic.rep": 0.00023, // 1/4320, this should take 24 hours of running to produce the cap of 20. This cannot ever give more than 20 rep, and the cap is account-wide.
+		"max":20
+		},
+    },
+    
+  },
+       {
+        "id": "aquatic_divination_cap", //hall upgrade, capstone of abyssal warning system.
+        "name": "Abyssal readiness",
+        "desc": "With the eruptions charted and predicted, descending into the Abyss is easier than ever.",
+        "require": "abysswarning.capped.total==20",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+		  "divination.max": 2,
+          "abysspreparations.mod.cost.gold": -5000,
+		  "abysspreparations.mod.cost.research": -10000,
+		  "abysspreparations.mod.cost.waterunes": -20
+        }
+      },
+     {
+    "id": "underdream",
+    "name": "???",
+    "desc": "Speak your wish and seal the deal.",
+    "verb": "???",
+    "require": "g.dreamchamber>0&&g.aquatic>0", //you can only get aquatic rep as a merman, as it requires you to stay underwater for a while.
+	"warn":true
+	"warntext": "Do not do this. This will give you 20 aquatic reputation in return for all your wizards, past and present. It's not worth it.",
+    "legth":60,
+	"once":true
+	"cost": {
+      "dreams": 8,
+      "sindel": 5,
+    },
+    "result": {
+	"capped": {
+		"fact_aquatic.rep": 20
+		"max":20
+		},
+	"special": "end" //deletes every current and past wizard in your hall. Prevents re-import of their save files. Prestige retention is in effect.
+    },
+    
+  },
+       {
+        "id": "aquatic_dream_cap", //hall upgrade, capstone of ???.
+        "name": "???",
+        "desc": "???",
+        "require": "underdream.capped.total==20",
+        "max": 1,
+        "cost": {
+          "prestige": 20
+        },
+        "mod": {
+		  "dreams.max": 2,
+        }
+      },
+ Classes:
+  {
+    "id": "hydromancer",
+    "desc": "master of water",
+    "tags": "t_tier2",
+    "actdesc": "Become a hydromancer, a mage with a strong affinity for water",
+    "require": "g.tier1>0&&g.waterlore>=10",
+    "cost": {
+      "research": 1000,
+      "arcana": 15,
+      "tomes": 10,
+      "watergem": 10
+    },
+    "effect": {
+      "sp": 2
+    },
+    "mod": {
+      "tier2": true,
+      "waterlore.max": 2,
+      "waterlore.rate": "10%",
+      "dodge": "10%",
+      "mana.max": 2
+    },
+    "flavor": "Complimeentary gills included"
+  },
+  {
+    "id": "rainmaker",
+    "desc": "No dancing required.",
+    "tags": "t_tier4",
+    "actdesc": "Become a rainmaker.",
+    "require": "g.tier3>0&&g.earthlore>=20",
+    "cost": {
+      "research": 4000,
+      "arcana": 25,
+      "tomes": 30,
+      "watergem": 50
+    },
+    "effect": {
+      "sp": 2
+    },
+    "mod": {
+      "tier4": true,
+      "waterlore.max": 3,
+	  "dodge": "10%",
+      "stamina.max": "10%",
+      "water.rate": 0.5
+    },
+    "flavor": "making it rain"
+  },
+  {
+    "id": "seawhisperer",
+	"name": "sea whisperer",
+    "desc": "shape the flow of the seas.",
+    "tags": "t_tier6",
+    "actdesc": "Become a sea whisperer.",
+    "require": "g.tier5>0&&(g.rainmaker+g.hydromancer)>0&&g.aquatic>0"
+    "cost": {
+      "research": 10000,
+      "arcana": 50,
+      "tomes": 40,
+      "earthgem": 100,
+      "earthrune": 20
+    },
+    "effect": {
+      "sp": 2
+    },
+    "mod": {
+      "tier6": true,
+      "waterlore.max": 3,
+	  "dodge": "10%",
+      "stamina.max": "10%",
+    },
+    "flavor": "The slightest whisper begets the biggest storm"
+  },
+homes:
+  {
+    "id": "abyssdwelling",
+    "name": "Abyssal dwelling",
+    "desc": "An underwater estate at the edge of the great Abyss.",
+    "cost": {
+      "research": 20000,
+      "gold": 15000,
+      "waterrune": 5
+    },
+    "require": "g.aquatic>0&&wizardhall.aquaticembassy>0", //you need to be able to live underwater AND have relations with aquatics to get this.
+    "mod": {
+      "minions.max": 80,
+      "space.max": 600
+      "waterlore.max": 5,
+      "water.max": 5,
+	  "water.rate": 0.5
+    }
+  },
+   {
+    "id": "apprenticeup1",
+    "name": "Campus dorm room",
+    "desc": "A nice room, shared with another student.",
+    "require": "wizardhall.apprenticehousing>0&&apprentice", //replaces the alcove dwelling
+    "mod": {
+		"space.max": 15
+    }
+  },
+   {
+    "id": "apprenticeup2",
+    "name": "Campus own room",
+    "desc": "Advanced students have a right to their own room.",
+    "cost": {
+	   "research": 100
+    },
+    "require": "wizardhall.apprenticehousing>0&&neophyte", //replaces the attic dwelling
+    "mod": {
+		"space.max": 20
+    }
+  },
+actions:
+  {
+    "id": "terraform",
+    "name": "Shape landscape",
+    "desc": "Improve the conditions of local countryside",
+    "verb": "terraforming",
+    "require": "g.geosculpting>0",
+    "length": 15,
+    "at": {
+      "10": {
+        "effect.gems.max": 0.0002
+        "effect.gem.max": 0.0002
+      },
+      "50": {
+        "effect.earthgem": 0.01
+      },
+      "100": {
+        "effect.gems.max": 0.0002
+        "effect.gem.max": 0.0002
+      },
+      "250": {
+        "effect.earthgem": 0.01
+      }
+    },
+	"run": {
+      "stamina": 1,
+      "earth": 1
+    },
+    "effect": {
+      "earthgem": 0.01,
+      "gems.max": 0.0002
+      "gem.max": 0.0002
+    },
+    "result": {
+      "geosculpting.max": 0.01
+
+    }
+  },
+
+	{
+
+		"id":"maketitanhammer", //creates a weapon
+		"name":"Titan's hammer",
+		"desc":"The powers of creation and destruction, in your very hands",
+		"verb":"Creating masterpiece",
+		"require":"g.titan>0&&g.mythicanvil>0",
+		"length":180,
+		"cost":{
+			"earthgem":300,
+			"earthrune":80,
+			"sindel":5,
+			"ichor":5
+		},
+		"run":{
+			"stamina":4,
+			"earth":3
+		},
+		"result":{
+			"titanhammer":1
+		}
+
+	},
+	
+  {
+    "id": "act_mine", //changing the requirements, geoscupltors can access it earlier than normal.
+    "name": "mine",
+    "desc": "Delve the depths for gems of mystic potential.",
+    "verb": "mining",
+    "need": "t_mine||g.geosculpting>0",
+    "length": 40,
+    "perpetual": true,
+    "run": {
+      "stamina": 0.5,
+      "earth": 0.2
+    },
+    "at": {
+      "20": {
+        "effect.gold.min": 0.3,
+        "effect.gold.max": 0.4,
+        "effect.gems": 0.05
+      },
+      "150": {
+        "effect.gold.min": 0.4,
+        "effect.gold.max": 0.6,
+        "effect.gems": 0.05
+      },
+      "550": {
+        "effect.gold.min": 0.5,
+        "effect.gold.max": 0.8
+      },
+      "2000": {
+        "effect.gold.min": 0.8,
+        "effect.gold.max": 0.5,
+        "effect.gems": 0.15
+      }
+    },
+    "effect": {
+      "gold": "0.5~1"
+    }
+  },	
+weapons:
+  {
+    "id": "titanhammer", //this cannot have a material associated with it.
+    "attack": {
+      "kind": "blunt",
+      "damage": "40~50"
+    },
+	"effect": { //this is supposed to be a passive effect of wielding this
+		"earth.rate" : 0.5,
+		"earth.max": 10,
+		"player.defense":30
+	},
+    "hands": 2,
+    "kind": "hammer",
+    "level": 15,
+    "cost": 5000
+  }
+
+ 
+upgrades:
+  {
+    "id": "earthworks",
+    "desc": "Strong walls around your home, to deter unwise attackers",
+    "require": "g.geosculpting>=5",
+    "max": 2,
+    "cost": {
+      "gold": 300,
+      "research": 250
+    },
+    "mod": {
+      "geosculpting.max": 1,
+	  "player.defense":5
+    },
+    "flavor": "Doubles as a burial mound"
+  },
+  {
+    "id": "coretap",
+    "name": "Core tap",
+    "desc": "tap the world's core for infinite heat",
+    "require": "g.earthshaker>0&&g.geosculpting>=6",
+    "max": 1,
+    "cost": {
+      "gold": 5000,
+      "research": 4000
+      "earthrune": 5
+    },
+    "mod": {
+      "firelore.max": 3,
+	  "earthlore.max": 3,
+	  "geosculpting.max": 1,
+	  "earth.rate": 0.2,
+	  "fire.rate": 0.2
+    },
+  },
+	{
+		"id":"tamedroads",
+		"name":"tamed pathway",
+		"require":"g.geomancer>0&&g.dist>=200",
+		"desc":"Train roads around your home to behave.",
+		"cost":{
+			"gold":3000,
+			"earthgem":5,
+			"earth":10,
+		},
+		"mod":{
+			"dist":100,
+		},
+		"flavor":"those good boys are perfect for keeping unwanted guests away"
+	},
+  {
+    "id": "hiddenchamber",
+    "name": "hidden chamber",
+    "desc": "a place to meditate, deep under the earth",
+    "require": "g.geosculpting>0",
+    "max": 1,
+    "cost": {
+      "gold": 500,
+      "research": 500
+      "earthgem": 5
+    },
+    "mod": {
+      "concentration.max": 1
+    },
+  },
+  {
+    "id": "rockcollection",
+    "name": "Minerals collection",
+    "desc": "Sorted by hardness.",
+    "require": "g.geomancer>0",
+    "max": 3,
+    "cost": {
+      "gold": 500,
+      "research": 1000
+    },
+    "mod": {
+      "hammerlore.max": 1
+    },
+    "flavor": "A fantastic way to test out your strength"
+  },
+  {
+    "id": "artificialmountain",
+    "name": "Make a mountain",
+    "desc": "leave your mark on this world",
+    "require": "g.earthshaker>0",
+    "max": 1,
+    "cost": {
+      "gold": 5000,
+      "research": 7500
+      "earthrunes": 10
+    },
+    "mod": {
+      "gems.rate": 0.1
+      "mine.effect.gems": 0.1, 
+	  "player.fame": 5
+	  "hammerlore.max":2
+	  "geoscuplting.max":2
+	  
+    }
+  },
+  {
+    "id": "constructquarry",
+    "name": "Construct quarry",
+    "desc": "A rockbreaking facility increases mining efficiency",
+    "require": "g.geosculpting>0",
+    "max": 3,
+    "cost": {
+      "gold": 1500,
+      "research": 2000
+      "earthgem": 20
+    },
+    "mod": {
+      "mine.effect.gems": 0.1, 
+      "hammerlore.max": 1	
+    }
+  },
+  {
+    "id": "mythicanvil",
+    "name": "Mythic anvil",
+    "desc": "made of mythical metals, this anvil can withstand even a titan's power",
+    "require": "g.titan>0",
+    "max": 1,
+    "cost": {
+      "gold": 10000,
+      "research": 15000
+      "tomes": 100
+      "earthrunes": 50
+    },
+    "mod": {
+      "hammerlore.max": 2
+      "geosculpting.max": 2
+      "crafting.max": 2
+    }
+  },
+  {
+    "id": "undertunnels",
+    "name": "Underground pathways",
+    "desc": "A twisting maze of passages, all alike",
+    "require": "g.geoscuplting>=10",
+    "max": 1,
+    "cost": {
+      "gold": 5000,
+      "research": 10000,
+      "earthrune": 1
+    },
+    "mod": {
+      "dist": "25%"
+    },
+  },
+  {
+  
+ spells: // If a spell already exists, implies a requirements or effect change.
+  {
+    "id": "steelskin",
+    "name": "steel skin",
+    "desc": "hardens the skin of the caster.",
+    "school": "earth",
+    "require": "stoneskin&&g.geosculpting>0",
+    "level": 5,
+    "buy": {
+      "research": 1000,
+      "tomes": 1,
+      "earthgem": 10
+    },
+    "cost": {
+      "earth": 7
+    },
+    "dot": {
+      "duration": 120,
+      "mod": {
+        "player.defense": 25
+      }
+    }
+  },
+   {
+    "id": "adamantshell",
+    "name": "adamant shell",
+    "desc": "your skin becomes adamant.",
+    "school": "earth",
+    "require": "steelskin&&g,geosculpting>7",
+    "level": 10,
+    "buy": {
+      "research": 4000,
+      "tomes": 5,
+      "earthgem": 30
+    },
+    "cost": {
+      "earth": 10
+    },
+    "dot": {
+      "duration": 180,
+      "mod": {
+        "player.defense": 50
+      }
+    }
+  },
+   {
+    "id": "tosand",
+    "name": "to sand",
+    "desc": "you briefly turn into fine sand.",
+    "school": "earth",
+    "require": "g.titan&&g,geosculpting>11",
+    "level": 15,
+    "buy": {
+      "research": 8000,
+      "tomes": 25,
+      "earthrune": 25
+    },
+    "cost": {
+      "earth": 15
+    },
+    "dot": {
+      "duration": 10,
+      "mod": {
+        "player.defense": 200
+      }
+    }
+  },
+  {
+    "id": "quicksand",
+    "desc": "command the earth to swallow the enemy",
+    "school": "earth",
+    "require": "g,geosculpting>7",	
+    "level": 15,
+    "buy": {
+      "sp": 1,
+      "research": 8000,
+      "tomes": 25,
+      "earthrune": 25
+    },
+    "cost": {
+      "earth": 15
+    },
+    "attack": {
+      "targets": "enemies",
+      "dot": {
+        "duration": 15,
+        "dmg": "15~25",
+        "mod": {
+          "speed": -12
+        }
+      }
+    }
+  },
+  {
+    "id": "entomb",
+    "desc": "bury the enemy deep beneath the earth.",
+    "school": "earth",
+    "require": "g.titan>0",	
+    "level": 25,
+    "buy": {
+      "sp": 15,
+      "research": 30000,
+      "tomes": 200
+      "codices": 700,
+      "earthrune": 60
+	  "earthgem": 350
+    },
+    "cost": {
+      "earth": 25
+	  "sindel": 2
+    },
+    "attack": {
+      "targets": "enemies",
+      "dot": {
+        "duration": 30,
+        "dmg": "50~75",
+        "mod": {
+          "speed": -12
+        }
+      }
+    }
+  },
+{
+    "id": "smite", 
+    "name": "Smite",
+    "school": "earth",
+    "require": "g.hammerlore>=5",
+    "level": 2,
+    "buy": {
+      "research": 500
+    },
+    "cost": {
+      "earth": 2
+	  "stamina": 1
+    },
+    "attack": {
+      "damage": "4~5+weapondamage",
+      "tohit": 3,
+      "kind": "earth"
+    }
+  },
+{
+    "id": "fissure", 
+    "desc": "Knock the enemy prone with a surprising blow.",
+    "name": "Fissure",
+	"cd": 200
+    "school": "earth",
+    "require": "g.hammerlore>=10",
+    "level": 5,
+    "buy": {
+      "research": 12000
+    },
+    "cost": {
+      "earth": 8
+	  "stamina": 12
+    },
+    "attack": {
+      "damage": "12~15+weapondamage*1.5",
+      "tohit": -5,
+      "kind": "earth"
+      "dot": {
+        "id": "fissure",
+        "kind": "earth",
+        "effect": "stun" //target enemy skips their next turn, without changing their attack order
+      }
+    }
+  },
+  
+ 
