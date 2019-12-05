@@ -1213,7 +1213,7 @@
         "level": 2,
         "result": {
           "firelore.max": 0.01,
-          "conjuring.max": 0.02,
+          "conjuration.max": 0.02,
           "frost.rate": -0.1,
 		  "winteressence": 0.1
         }
