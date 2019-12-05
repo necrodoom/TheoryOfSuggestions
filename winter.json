@@ -376,12 +376,12 @@
         },
         "mod": {
           "iceshard.attack.damage.min": 10,
-          "iceshard.attack.damage.max": 15
+          "iceshard.attack.damage.max": 15,
 		  "iceshard.cost.ice": 6,
           "iceflame.attack.dot.effect.dmg.min": 20,
-          "iceflame.attack.dot.effect.dmg.max": 30
+          "iceflame.attack.dot.effect.dmg.max": 30,
 		  "iceflame.cost.ice": 6,
-		  "iceflame.cost.fire": 2,
+		  "iceflame.cost.fire": 2
         }
       },
       {
