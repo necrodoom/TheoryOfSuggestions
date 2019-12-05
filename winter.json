@@ -300,7 +300,7 @@
         },
         "mod": {
           "waterlore2.max": 1,
-		  "cryomancy.max": 2
+		  "icelore.max": 2
         }
       },
       {
@@ -314,7 +314,7 @@
         },
         "mod": {
           "waterlore2.max": 3,
-		  "cryomancy.rate": 50
+		  "icelore.rate": 50
         }
       },
       {
@@ -343,7 +343,7 @@
         },
         "mod": {
           "waterlore2.max": 3,
-		  "cryomancy.rate": "200%"
+		  "icelore.rate": "200%"
         }
       },
       {
@@ -358,9 +358,9 @@
 		  "waterrune": 30
         },
         "mod": {
-          "cryomancy.max": 10,
-		  "cryomancy.rate": 500,
-		  "cryomancy.rate": "200%"
+          "icelore.max": 10,
+		  "icelore.rate": 500,
+		  "icelore.rate": "200%"
         }
       },
       {
@@ -381,7 +381,7 @@
           "iceflame.attack.dot.effect.dmg.min": 20,
           "iceflame.attack.dot.effect.dmg.max": 30
 		  "iceflame.cost.ice": 6,
-		  "iceflame.cost.ice": 2,
+		  "iceflame.cost.fire": 2,
         }
       },
       {
