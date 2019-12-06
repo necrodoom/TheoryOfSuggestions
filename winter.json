@@ -303,17 +303,19 @@
 				"desc": "An old log detailing the ordering of materials for production. It appears this place required a LOT of materials to run",
 				"require": "g.w_fazbitknowledge>=500",
 				"mod": {
-					"crafting.max": 1
+					"crafting.max": 1,
+					"gems.max": 20,
+					"gem.max": 10
 				}
 			},
 			{
 				"id": "w_fazbit2",
 				"name": "withered designs",
-				"desc": "A drawing of a human with unnaturally large eyes. The skeleton is wrong.",
+				"desc": "An anatomycal drawing of a human with unnaturally large eyes. The skeleton is wrong.",
 				"require": "g.w_fazbitknowledge>=5000",
 				"mod": {
 					"crafting.rate": 50,
-					"anatomy.max": 1
+					"anatomy.max": 2
 				}
 			},
 			{
@@ -359,7 +361,7 @@
 			{
 				"id": "w_fazbit7",
 				"name": "transportation sigils",
-				"desc": "Your investigations reveals multiple sigils woven into the walls and floors of the workshop. They appear to be designed to transport materials in an automated fashion. Warning spells are included, to compell anyone in the way to step aside.",
+				"desc": "Your investigation reveals multiple sigils woven into the walls and floors of the workshop. They appear to be designed to transport materials in an automated fashion. Warning spells are included, to compell anyone in the way to step aside.",
 				"require": "g.w_fazbitknowledge>=250000",
 				"mod": {
 					"summoning.max": 1,
@@ -379,8 +381,8 @@
 			},
 			{
 				"id": "w_fazbit9",
-				"name": "discarded drawings",
-				"desc": "A large bin full of decayed paper and rotten paints.",
+				"name": "discarded missives",
+				"desc": "A large bin full of paper dust. There are traces of long-decayed ink and paint.",
 				"require": "g.w_fazbitknowledge>=600000",
 				"mod": {
 					"lore.rate": "100%",
@@ -488,8 +490,8 @@
 					"iceshard.cost.ice": 6,
 					"iceflame.attack.dot.effect.dmg.min": 20,
 					"iceflame.attack.dot.effect.dmg.max": 30,
-					"iceflame.cost.ice": 6,
-					"iceflame.cost.fire": 2
+					"iceflame.cost.ice": 9,
+					"iceflame.cost.fire": 3
 				}
 			},
 			{
@@ -751,6 +753,22 @@
 					"hearth.cost.firegem": 1,
 					"frost.rate": -1,
 					"fire.rate": 0.1
+				}
+			},
+			{
+				"id": "fazbithearth",
+				"desc": "Originally used to warm the entire workshop, can be repurposed for home use.",
+				"require": "g.w_fazbit9>=10",
+				"max": 1,
+				"cost": {
+					"firegem": 100,
+					"firerune": 25
+				},
+				"mod": {
+					"frost.rate": -100,
+					"fire.rate": 0.5,
+					"firelore.max": 5,
+					"iceflame.attack.dot.duration": 5
 				}
 			},
 			{
