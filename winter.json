@@ -1479,7 +1479,7 @@
 				"effect": {
 					"mana": "0.5~1",
 					"firelore.exp": 3,
-					"conjuring.exp": 5,
+					"conjuration.exp": 5,
 					"madness": "2~3"
 				},
 				"level": 2,
