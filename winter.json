@@ -975,7 +975,7 @@
 				},
 				"loot": {
 					"livingsnow": "30%",
-					"winteressence": 0.1
+					"winteressence": 0.01
 				}
 			},
 			{
@@ -993,7 +993,7 @@
 				},
 				"loot": {
 					"livingsnow": 3,
-					"winteressence": 0.1
+					"winteressence": 0.01
 				}
 			},
 			{
@@ -1012,7 +1012,7 @@
 				"loot": {
 					"bloodgem": 1,
 					"livingsnow": 1,
-					"winteressence": 0.1
+					"winteressence": 0.01
 				}
 			},
 			{
@@ -1032,7 +1032,7 @@
 				},
 				"loot": {
 					"livingsnow": "0~5",
-					"winteressence": 0.1
+					"winteressence": 0.01
 				},
 				"immune": "ice,water,air"
 			},
@@ -1052,7 +1052,7 @@
 				},
 				"loot": {
 					"icelore.max": 0.02,
-					"winteressence": 0.1
+					"winteressence": 0.01
 				}
 			},
 			{
@@ -1072,7 +1072,7 @@
 				},
 				"loot": {
 					"snowman": 1,
-					"winteressence": 0.1
+					"winteressence": 0.01
 				}
 			},
 			{
@@ -1092,7 +1092,7 @@
 				"loot": {
 					"livingsnow": 1,
 					"watergem": 1,
-					"winteressence": 0.1
+					"winteressence": 0.01
 				}
 			}
 		],
