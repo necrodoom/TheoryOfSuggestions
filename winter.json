@@ -445,9 +445,9 @@
 				"desc": "People around you shiver uncontrollably",
 				"require": "g.winteressence>=500",
 				"cost": {
-					"livingsnow": 100,
-					"snowman": 50,
-					"waterrune": 10
+					"livingsnow": 50,
+					"snowman": 25,
+					"watergem": 75
 				},
 				"mod": {
 					"waterlore2.max": 3,
@@ -460,10 +460,10 @@
 				"desc": "Your very presence is enough to turn the warmest summer to coldest winter",
 				"require": "g.winteressence>=1000",
 				"cost": {
-					"livingsnow": 100,
-					"snowman": 50,
-					"watergem": 250,
-					"waterrune": 30
+					"livingsnow": 70,
+					"snowman": 30,
+					"watergem": 100,
+					"waterrune": 20
 				},
 				"mod": {
 					"icelore.max": 10,
@@ -477,10 +477,10 @@
 				"desc": "You spread the joy of the cold far and wide, for the winter has come",
 				"require": "g.winteressence>=5000",
 				"cost": {
-					"livingsnow": 150,
-					"snowman": 800,
-					"watergem": 350,
-					"waterrune": 50
+					"livingsnow": 100,
+					"snowman": 50,
+					"watergem": 150,
+					"waterrune": 25
 				},
 				"mod": {
 					"iceshard.attack.damage.min": 10,
