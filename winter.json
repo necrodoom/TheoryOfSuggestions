@@ -1143,7 +1143,7 @@
 					"stamina": 2
 				},
 				"effect": {
-					"frost": 1
+					"w_fazbitknowledge": 20
 				},
 				"encs": [
 					"enc_w_faz_nothingthere",
