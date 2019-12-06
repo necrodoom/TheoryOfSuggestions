@@ -195,7 +195,7 @@
 				"id": "makesnowman",
 				"name": "melt snomunculus",
 				"desc": "Liquify your cold creation.",
-				"locked": "g.snowman>=1",
+				"require": "g.snowman>=1",
 				"verb": "Melting",
 				"cost": {
 					"snowman": 1,
