@@ -1727,7 +1727,7 @@
 				"cost": 100,
 				"attack": {
 					"name": "blizzard",
-					"damage: "5~12",
+					"damage": "5~12",
 					"kind": "water",
 					"targets": "enemies",
 					"dot": {
