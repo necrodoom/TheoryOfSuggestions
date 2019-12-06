@@ -37,8 +37,8 @@
 			{
 				"id": "w_fazbitknowledge",
 				"name": "fazbit's knowledge",
-				"desc": "A story of fazbit's workshop",
-				"require": "g.impossible>=1",
+				"desc": "A story of fazbit's workshop. Event-specific",
+				"hidden": true,
 				"max": 1000000
 			},
 			{
@@ -790,8 +790,9 @@
 			},
 			{
 				"id": "fazbithearth",
+				"name": "Fazbit's hearth",
 				"desc": "Originally used to warm the entire workshop, can be repurposed for home use.",
-				"require": "g.w_fazbit9",
+				"require": "g.w_fazbit9>0",
 				"max": 1,
 				"cost": {
 					"firegem": 100,
@@ -1682,7 +1683,7 @@
 					"icelore.max": 0.001
 				},
 				"loot": {
-					"snowman": "1",
+					"snowman": 1,
 					"winteressence": 0.1
 				}
 			}
