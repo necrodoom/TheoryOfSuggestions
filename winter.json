@@ -512,7 +512,7 @@
 				"id": "preparetree",
 				"name": "preparation",
 				"desc": "The altar glows faintly with your offerings. Your gifts were well-received, but more is required.",
-				"require": "(g.evil_sacrifice>=1+g.good_sacrifice)>=1",
+				"require": "(g.evil_sacrifice+g.good_sacrifice)>=1",
 				"effect": {
 					"prestige": 1,
 					"evt_sacrifice": true
