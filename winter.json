@@ -1717,7 +1717,7 @@
 		"rares": [
 			{
 				"id": "iceorb",
-				"name": "orb of endless winter",
+				"name": "orb of winters",
 				"desc": "A snowglobe with magical powers. It reminds you of colder days.",
 				"level": 10,
 				"save": true,
@@ -1727,13 +1727,15 @@
 				"cost": 100,
 				"attack": {
 					"name": "blizzard",
+					"damage: "5~12",
+					"kind": "water",
 					"targets": "enemies",
 					"dot": {
 						"duration": 20,
-						"kind": "ice",
-						"dmg": "5~12",
+						"kind": "water",
+						"damage": "5~12",
 						"mod": {
-							"speed": -3
+							"speed": -5
 						}
 					}
 				},
