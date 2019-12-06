@@ -372,8 +372,9 @@
 				"desc": "A letter from a few centuries ago, requesting the aid of Fazbit in producing a large amount of items for an unknown festivity. The designs are supposed to be enclosed, but are clearly missing.",
 				"require": "g.w_fazbitknowledge>=400000",
 				"mod": {
-					"summoning.max": 1,
-					"runelore.max": 2
+					"worldlore.rate": 100,
+					"worldlore.rate": "100%",
+					"worldlore.max": 5
 				}
 			},
 			{
