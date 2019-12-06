@@ -15,37 +15,6 @@
 				"desc": "A copy of yourself arises from the quickened snow. You feel its limbs like you feel your own arms."
 			},
 			{
-				"id": "iceshard0",
-				"name": "ice shard",
-				"desc": "After a few preliminary tests of the spell, you feel the potential in it.",
-				"require": "g.iceshard>=10",
-				"mod": {
-					"frost.rate": 2,
-					"icelore.max": 1
-				}
-			},
-			{
-				"id": "iceshard1",
-				"name": "ice shard",
-				"desc": "With each Ice Shard cast you feel your power grow, but your warmth begins to fade as well.",
-				"require": "g.iceshard>=100",
-				"mod": {
-					"frost.rate": 5,
-					"icelore.max": 1
-				}
-			},
-			{
-				"id": "iceshard2",
-				"name": "ice mastery",
-				"desc": "Your power is immeasrable, you veins suffused with cold. But something feels wrong. The warmth is gone",
-				"require": "g.iceshard>=1000",
-				"mod": {
-					"hearth.mod.frost.rate": "-100%",
-					"icelore.max": 4,
-					"frost.mod.hp.rate": "-200%"
-				}
-			},
-			{
 				"id": "evt_sacrifice",
 				"name": "the path opens",
 				"desc": "The sacrifice made, a portion of the fog parts before you, like curtains hanging in the air. The faintest outlines of a path appear on the frozen ground."
@@ -80,7 +49,7 @@
 				"max": 5,
 				"mod": {
 					"frost.rate": 1,
-					"icelore.max": 0.5
+					"icelore.max": 0.2
 				},
 				"flavor": "It's not a snowman. Why would you say that?"
 			},
@@ -127,10 +96,10 @@
 			},
 			{
 				"id": "ice",
+				"tags": "manas",
 				"desc": "ice mana",
 				"require": "g.icelore>=1",
-				"max": 0,
-				"tags": "manas"
+				"max": 0
 			},
 			{
 				"id": "snowdrop",
@@ -157,7 +126,8 @@
 					"stamina",
 					"manas",
 					"hp",
-					"stress"
+					"stress",
+					"frost"
 				],
 				"effect": {
 					"manas": {
@@ -172,7 +142,7 @@
 				}
 			},
 			{
-				"id": "mk_snowman",
+				"id": "makesnowman",
 				"name": "build snomunculus",
 				"desc": "Build a homunculus from snow",
 				"flavor": "It's not a snowman. Why would you say that?",
@@ -192,7 +162,7 @@
 				}
 			},
 			{
-				"id": "makesnowman",
+				"id": "meltsnowman",
 				"name": "melt snomunculus",
 				"desc": "Liquify your cold creation.",
 				"require": "g.snowman>=1",
@@ -201,6 +171,11 @@
 					"snowman": 1,
 					"fire": 5
 				},
+				"fill": [
+					"watergem",
+					"water",
+					"frost"
+				],
 				"result": {
 					"watergem": 2,
 					"water": 10,
@@ -215,7 +190,7 @@
 				"length": 75,
 				"repeat": false,
 				"cost": {
-					"emblemofice": 1,
+					"arcana": 5,
 					"tomes": 1
 				},
 				"run": {
@@ -231,10 +206,11 @@
 		"upgrades": [
 			{
 				"id": "w_multitask",
-				"name": "workforce",
+				"name": "use snow as workforce",
 				"desc": "Use your Snow Double as an extension of yourself",
 				"cost": {
-					"gold": 1
+					"ice": 2,
+					"frost.rate": 0.5
 				},
 				"require": "g.evt_snowcopy>=1",
 				"warn": true,
@@ -249,10 +225,10 @@
 			},
 			{
 				"id": "w_fame",
-				"name": "donate copy",
+				"name": "donate snowcopy",
 				"desc": "Donate your Snow Double to a wizarding academy",
 				"cost": {
-					"gold": 1
+					"gold": 100
 				},
 				"warn": true,
 				"require": "g.evt_snowcopy>=1",
@@ -272,7 +248,7 @@
 				"name": "cold calculation",
 				"desc": "Dedicate your Snow Double to arcane studies.",
 				"cost": {
-					"gold": 1
+					"arcana": 2
 				},
 				"warn": true,
 				"require": "g.evt_snowcopy>=1",
@@ -527,7 +503,7 @@
 					"snowdrop": 2
 				},
 				"result": {
-					"icelore.mod.frost.rate": -0.3,
+					"icelore.mod.frost.rate": -0.15,
 					"hearth.mod.frost.rate": -1,
 					"snowman.mod.frost.rate": -0.8
 				}
@@ -536,7 +512,7 @@
 				"id": "preparetree",
 				"name": "preparation",
 				"desc": "The altar glows faintly with your offerings. Your gifts were well-received, but more is required.",
-				"require": "g.evil_sacrifice>=1||g.good_sacrifice>=1",
+				"require": "(g.evil_sacrifice>=1+g.good_sacrifice)>=1",
 				"effect": {
 					"prestige": 1,
 					"evt_sacrifice": true
@@ -556,7 +532,7 @@
 				"desc": "You enter a relentless fog which the strongest spells do not disperse. At their center you find an altar of sacrifice. A small offering should do.",
 				"disable": "evil_sacrifice",
 				"warn": true,
-				"require": "g.evt_w_legend>0&&(g.evil==0||g.good==1)",
+				"require": "g.winterlore>=5&&(g.evil==0||g.good==1)",
 				"cost": {
 					"gems": 10,
 					"gold": 200
@@ -567,14 +543,15 @@
 					"lightlore.max": 1,
 					"light.rate": 0.2,
 					"frost.rate": -1
-				}
+				},
+				"flavor": "... howewer, later was found that, while liking fresh meat, spirits didn't turn back gifts jewelry and runes"
 			},
 			{
 				"id": "evil_sacrifice",
 				"name": "winter fog",
 				"desc": "You enter a relentless fog which the strongest spells do not disperse. At their center you find an altar of sacrifice. Inwardly you smile; you know just the thing.",
 				"disable": "good_sacrifice",
-				"require": "g.evt_w_legend>0&&(g.good==0||g.evil==1)",
+				"require": "g.winterlore>=3&&(g.good==0||g.evil==1)",
 				"warn": true,
 				"cost": {
 					"bodies": 5,
@@ -585,6 +562,67 @@
 					"ice.rate": 0.5,
 					"icelore.max": 2,
 					"shadow.rate": 0.2
+				},
+				"flavor": "in times of old, people used innards of fresh bodies to decorate trees as a sacrifice to spirits of coldest night"
+			},
+			{
+				"id": "iceshard0",
+				"name": "improve ice shard",
+				"desc": "After a few preliminary tests of the spell, you feel the potential in it.",
+				"require": "g.iceshard>=10",
+				"cost": {
+					"ice": 2,
+					"research": 100
+				},
+				"mod": {
+					"frost.rate": 2,
+					"icelore.max": 1,
+					"player.bonuses.ice": 0.5,
+					"player.hits.ice": 0.5
+				}
+			},
+			{
+				"id": "iceshard1",
+				"name": "ice proficiency",
+				"desc": "As you use ice magic more and more, it starts to resonate with you. Maybe, you can push it little further",
+				"require": "g.iceshard>=100&&g.iceshard0>0",
+				"cost": {
+					"ice": 3,
+					"research": 250
+				},
+				"mod": {
+					"frost.rate": 5,
+					"icelore.max": 1,
+					"player.bonuses.ice": 1.5,
+					"player.hits.ice": 1.5
+				},
+				"log": {
+					"name": "ice shard proficiency",
+					"desc": "With each Ice Shard cast you feel your power grow, but your warmth begins to fade as well."
+				}
+			},
+			{
+				"id": "iceshard2",
+				"name": "ice mastery",
+				"desc": "You feel like imbuing yourself with Ice can push your power even further.",
+				"require": "g.iceshard>=1000&&g.iceshard1>0",
+				"warn": true,
+				"cost": {
+					"ice": 10,
+					"frost": 40,
+					"sp": 2,
+					"arcana": 5
+				},
+				"mod": {
+					"hearth.mod.frost.rate": "-100%",
+					"icelore.max": 4,
+					"frost.mod.hp.rate": "-200%",
+					"player.bonuses.ice": 3,
+					"player.hits.ice": 3
+				},
+				"log": {
+					"name": "heart of ice",
+					"desc": "Your power is immeasurable, your veins suffused with cold. But something feels wrong. The warmth is gone."
 				}
 			}
 		],
@@ -670,10 +708,8 @@
 				},
 				"dot": {
 					"duration": 60,
-					"effect": {
-						"frost": "-2"
-					},
 					"mod": {
+						"frost.rate": "-2",
 						"player.resist.ice": 20
 					}
 				}
@@ -695,15 +731,13 @@
 					"10": {
 						"attack.damage.min": 2,
 						"attack.damage.max": 4,
-						"attack.tohit": 2,
-						"iceshard0": 1
+						"attack.tohit": 2
 					},
 					"50": {
 						"attack.damage.min": 3,
 						"attack.damage.max": 5
 					},
 					"100": {
-						"iceshard1": 1,
 						"attack.damage.min": 2,
 						"attack.damage.max": 4,
 						"attack.tohit": 2
@@ -719,8 +753,7 @@
 					"1000": {
 						"attack.damage.min": 2,
 						"attack.damage.max": 4,
-						"attack.tohit": 2,
-						"iceshard2": 1
+						"attack.tohit": 2
 					},
 					"2000": {
 						"attack.damage.min": 3,
@@ -1018,8 +1051,7 @@
 					"dmg": "2~3"
 				},
 				"loot": {
-					"ice.rate": 0.01,
-					"icelore.max": 0.1,
+					"icelore.max": 0.02,
 					"winteressence": 0.1
 				}
 			},
@@ -1085,7 +1117,7 @@
 					"livingsnow": 10
 				},
 				"loot": {
-					"snowman": "1~2"
+					"snowman": "0~2"
 				},
 				"encs": [
 					"enc_w_kidsplaying",
@@ -1111,8 +1143,8 @@
 				"encs": [
 					"movingsnow",
 					"enc_w_coldsnap",
-					"enc_emberstone",
 					"enc_w_coldsnap",
+					"enc_emberstone",
 					"drippingwater",
 					"frozenloam",
 					"w_crystalsocket",
@@ -1396,7 +1428,7 @@
 					"fire": -0.1,
 					"weary": "1~3",
 					"frost": "0~2",
-					"icelore.exp": "3"
+					"icelore.exp": 1
 				},
 				"loot": {
 					"codices": "2~5",
@@ -1518,7 +1550,6 @@
 				},
 				"level": 2,
 				"result": {
-					"candle.max": 0.05,
 					"crafting.max": 0.01,
 					"winteressence": 0.1
 				}
